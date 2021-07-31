@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>ここにタイトルを入れる</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'bbs/css/style.css' %}">
+
+    <!--
+    <link rel="stylesheet" href="../../static/bbs/css/style.css">
+    -->
+
+</head>
+<body>
+    <h1 class="bg-primary"><a class="text-white" href="{% url 'bbs:index' %}">ここにタイトルを入れる</a></h1>
+
+    <main class="row m-0">
+
+        <div class="col-sm-4">
+            <div class="test">テスト</div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="title">
+                <textarea class="form-control" name="comment"></textarea>
+                <input class="form-control" type="submit" value="送信">
+            </form>
+
+            <div class="row text-center my-2">
+                <div class="col-2">
+                    <div class="calender_icon"><i class="fas fa-chevron-left"></i></div>
+                    <div><a href="{{ prev_month }}">先月</a></div>
+                </div>
+
+                <form class="col-8" method="GET">
+                    <div class="select_square">
+                        <select name="year">
+                            {% for y in year_list %}
+                            <option value="{{ y }}" {% if year == y  %}selected{% endif %}>{{ y }}年</option>
+                            {% endfor %}
+                        </select>
+                        
+                    </div>
+                    <div class="select_square">
+                        <select name="month">
+                            <option value="1"  {% if month == 1  %}selected{% endif %}>1月</option>
+                            <option value="2"  {% if month == 2  %}selected{% endif %}>2月</option>
+                            <option value="3"  {% if month == 3  %}selected{% endif %}>3月</option>
+                            <option value="4"  {% if month == 4  %}selected{% endif %}>4月</option>
+                            <option value="5"  {% if month == 5  %}selected{% endif %}>5月</option>
+                            <option value="6"  {% if month == 6  %}selected{% endif %}>6月</option>
+                            <option value="7"  {% if month == 7  %}selected{% endif %}>7月</option>
+                            <option value="8"  {% if month == 8  %}selected{% endif %}>8月</option>
+                            <option value="9"  {% if month == 9  %}selected{% endif %}>9月</option>
+                            <option value="10" {% if month == 10 %}selected{% endif %}>10月</option>
+                            <option value="11" {% if month == 11 %}selected{% endif %}>11月</option>
+                            <option value="12" {% if month == 12 %}selected{% endif %}>12月</option>
+                        </select>
+                    </div>
+                    <input class="button_square" type="submit" value="絞り込み">
+                </form>
+
+                <div class="col-2">
+                    <a href="{{ next_month }}">
+                        <div class="calender_icon"><i class="fas fa-chevron-right"></i></div>
+                        <div>来月</div>
+                    </a>
+                </div>
+            
+            </div>
+
+            <table class="calender">
+                <thead>
+                    <tr class="calender_head">
+                        <td>日</td>
+                        <td>月</td>
+                        <td>火</td>
+                        <td>水</td>
+                        <td>木</td>
+                        <td>金</td>
+                        <td>土</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in days %}
+                    <tr>
+                        {% for d in w %}
+
+                        {% if d.id %}
+                        <td><a href="#{{ d.id }}" class="calender_link">{{ d.num }}</a></td>
+                        {% else %}
+                        <td>{{ d.num }}</td>
+                        {% endif %}
+
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <div class="col-sm-8">
+
+
+            {# TODO:同じ日に複数の日記が投稿されている場合、id属性が重複してHTMLの構文上誤りになる。(ブラウザが解釈して問題なく動作はするので実害は無い) #}
+            {% for topic in topics %}
+            <div id="{{ topic.dt|date:"Ynj" }}" class="topic_area">
+                <div class="topic_title">{{ topic.title }}</div>
+                <div class="topic_comment">{{ topic.comment|linebreaksbr }}</div>
+                <div class="topic_dt">投稿日時:{{ topic.dt|date:"Y-m-d H:i:s" }}</div>
+            </div>
+            {% endfor %}
+
+        
+        </div>
+        
+        
+        
+        
+    
+    </main>
+
+
+
+
+
+</body>
+</html>
+

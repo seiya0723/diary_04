@@ -1,0 +1,142 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+
+/* カレンダー装飾 */
+
+.calender_icon > i {
+    font-size:2rem;
+    color:orange;
+    text-shadow:0.2rem 0.2rem 0.2rem gray; 
+    
+}
+
+
+
+.calender {
+    text-align:center;
+    font-size:1.5rem;
+    border:solid 0.2rem black;
+    /* margin-top:0.5rem; */
+
+    /* カレンダーを中央に配置。 */
+    margin:0.5rem auto 0;
+}
+.calender td{
+    padding:0.5rem;
+    border:solid 0.1rem black;
+}
+.calender td:nth-child(1) {
+    color:crimson;
+}
+.calender td:nth-child(7) {
+    color:royalblue;
+}
+.calender_head {
+    font-weight:bold;
+    border-bottom:double 0.2rem black;
+}
+.calender_link {
+    font-weight:bold;
+    display:block;
+    width:100%;
+    height:100%;
+}
+.calender_link:hover {
+    font-weight:bold;
+
+
+}
+
+
+.test{
+    background:lavender;
+    border:solid 0.2rem black;
+    padding:1.0rem;
+
+}
+
+
+/* トピックの装飾 */
+.topic_area {
+    border:solid 0.1rem black;
+    margin:0.5rem 0;
+    padding:0.5rem;
+    background:lemonchiffon;
+    box-shadow:0.7rem 0.7rem 0.5rem gray;
+}
+.topic_title{
+    font-size:1.0rem;
+    margin:0.5rem 0;
+    font-weight:bold;
+    font-family:sans-serif;
+}
+.topic_dt {
+    font-size:0.85rem;
+    font-weight:bold;
+    text-align:right;
+}
+
+
+
+
+
+/* select tag 装飾 */
+.select_square {
+    position:relative;
+    display:inline-block;
+}
+.select_square select {
+    font-size:1.2rem;
+    font-family:monospace;
+    margin:0.25rem 0;
+    padding:0.25rem 2rem 0.25rem 0.5rem;
+    border:solid 0.2rem orange;
+    background:white;
+    cursor:pointer;
+}
+.select_square select:focus {
+    outline:none;
+}
+.select_square::before {
+    content:"";
+    position:absolute;
+    top:50%;
+    right:0.5rem;
+    transform:translate(0%,-50%);
+
+    width:0;
+    height:0;
+	border-left: 0.5rem solid transparent;
+	border-right: 0.5rem solid transparent;
+	border-top: 0.5rem solid orange;
+
+    pointer-events: none;
+}
+.select_square select:-ms-expand {
+	display: none;
+}
+.select_square select {
+    -webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+
+}
+.button_square {
+    font-size:1.2rem;
+    font-family:monospace;
+    margin:0.25rem 0;
+    padding:0.25rem 0.5rem;
+    border:solid 0.2rem orange;
+    border-radius:0.25rem;
+    background:white;
+}
+
+.button_square:hover {
+    background:orange;
+}
+
